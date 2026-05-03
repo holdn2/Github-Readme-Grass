@@ -160,6 +160,19 @@ describe("renderGrassSvg", () => {
     expect(svg).toContain("More");
   });
 
+  test("rounds only the warm full SVG background panel", () => {
+    const svg = renderGrassSvg({ username: "octocat", weeks });
+    const backgroundRect = svg.match(/<rect width="100%" height="100%"[^>]*>/)?.[0];
+    const tileBaseRects = [...svg.matchAll(/<rect class="tile-base [^"]+"[^>]*>/g)].map((match) => match[0]);
+
+    expect(backgroundRect).toContain('fill="#edf1df"');
+    expect(backgroundRect).toContain('rx="8"');
+    expect(backgroundRect).toContain('ry="8"');
+    expect(tileBaseRects.length).toBeGreaterThan(0);
+    expect(tileBaseRects.every((rect) => !/\sr[xy]=/.test(rect))).toBe(true);
+    expect(svg).not.toContain('fill="#f6f8f2"');
+  });
+
   test("escapes usernames before inserting them into SVG", () => {
     const svg = renderGrassSvg({ username: `<script>alert("x")</script>`, weeks });
 

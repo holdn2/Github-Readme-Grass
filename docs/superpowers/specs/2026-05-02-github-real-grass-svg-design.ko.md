@@ -78,6 +78,9 @@ Vercel에 배포할 수 있는 최소 Next.js 프로젝트를 사용한다.
 시각 표현은 절제한다.
 
 - 큰 장식 배경은 넣지 않는다.
+- 잔디가 너무 흐려 보이지 않도록 거의 흰색보다 살짝 진하고 따뜻한 field background를 사용한다. 단, README에서 읽기 쉬운 contrast는 유지한다.
+- 전체 SVG background panel에는 은은한 border radius를 적용해 README 이미지가 부드럽게 보이게 한다. 개별 contribution tile은 둥글게 만들지 않는다.
+- background texture는 선택 사항이다. 사용한다면 contribution tile과 경쟁하지 않을 정도로 매우 은은해야 한다.
 - animation은 넣지 않는다.
 - 무거운 gradient는 쓰지 않는다.
 - custom font에 의존하지 않는다.

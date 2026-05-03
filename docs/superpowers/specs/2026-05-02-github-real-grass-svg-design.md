@@ -78,6 +78,9 @@ Each day is a small top-down pixel tile. The whole grid should read as one conne
 The visual should stay restrained:
 
 - No large decorative background.
+- Use a slightly darker, warm field background than near-white so the grass does not feel washed out, while keeping enough contrast for README readability.
+- The overall SVG background panel should have a subtle border radius so the README image feels softer, without rounding individual contribution tiles.
+- Background texture is optional; if used, it must be extremely subtle and not compete with the contribution tiles.
 - No animated elements.
 - No heavy gradients.
 - No hidden dependency on custom fonts.

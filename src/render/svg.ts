@@ -25,12 +25,14 @@ const TITLE_TOP = 19;
 const MONTH_LABEL_TOP = 48;
 const LEGEND_TOP_PADDING = 24;
 const PIXEL_SIZE = 3;
+const BACKGROUND_RADIUS = 8;
 
 const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const SOIL = "#9b6a3a";
 const SOIL_DARK = "#7c4f2b";
 const SOIL_LIGHT = "#b77a44";
 const SOIL_MID = "#8f5d34";
+const FIELD_BACKGROUND = "#edf1df";
 const GRASS_BASE = ["", "#86c95a", "#5bad41", "#358a31", "#358a31"];
 const GRASS_DARK = ["", "#64a844", "#3a7c2d", "#226823", "#226823"];
 const GRASS_LIGHT = ["", "#a9df73", "#78c955", "#4da640", "#4da640"];
@@ -200,5 +202,5 @@ export function renderGrassSvg(input: GrassSvgInput): string {
   const generatedAt = input.generatedAt?.toISOString();
   const generated = generatedAt ? `<desc>Generated at ${escapeSvgText(generatedAt)}</desc>` : "";
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title" shape-rendering="crispEdges"><title id="title">${safeTitle}</title>${generated}<style>.title{font:600 14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#2f3328}.label{font:10px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#596150}</style><rect width="100%" height="100%" fill="#f6f8f2"/><text x="28" y="${TITLE_TOP}" class="title">${safeTitle}</text>${renderMonthLabels(input.weeks)}<g>${renderTiles(input.weeks)}</g>${renderLegend(legendY)}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title" shape-rendering="crispEdges"><title id="title">${safeTitle}</title>${generated}<style>.title{font:600 14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#2f3328}.label{font:10px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#596150}</style><rect width="100%" height="100%" rx="${BACKGROUND_RADIUS}" ry="${BACKGROUND_RADIUS}" fill="${FIELD_BACKGROUND}"/><text x="28" y="${TITLE_TOP}" class="title">${safeTitle}</text>${renderMonthLabels(input.weeks)}<g>${renderTiles(input.weeks)}</g>${renderLegend(legendY)}</svg>`;
 }
