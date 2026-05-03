@@ -18,7 +18,7 @@ The app exposes one public image endpoint:
 GET /api/grass?username=USERNAME
 ```
 
-The endpoint fetches the target user's contribution calendar from GitHub and returns an `image/svg+xml` response. Days with no contributions are rendered as brown soil. Days with more contributions show more green grass coverage. The visual style should feel like a small isometric plot of land: slightly pixel-inspired, more natural than a flat GitHub heatmap, but still readable at README size.
+The endpoint fetches the target user's contribution calendar from GitHub and returns an `image/svg+xml` response. Days with no contributions are rendered as brown dirt. Days with more contributions show denser green grass coverage. The visual style should feel like a connected Minecraft-inspired pixel field: more natural and playful than a flat GitHub heatmap, but still readable at README size.
 
 Out of scope for the first version:
 
@@ -61,12 +61,19 @@ The renderer should be pure and testable without network access. GitHub fetching
 
 ## Visual Design
 
-Each day is a small tile with:
+Each day is a small top-down pixel tile. The whole grid should read as one connected Minecraft-inspired field rather than many separated cubes.
 
-- Brown soil base for every day.
-- Subtle darker bottom edge to imply depth.
-- Green grass overlay whose coverage increases with contribution level.
-- Small irregular grass patches using simple SVG shapes, not external images.
+- Tile gaps should be minimal so adjacent days feel visually connected while still remaining individually countable.
+- `0` contribution days are brown dirt tiles with subtle pixel variation.
+- `1-4` contribution days are green grass tiles with deterministic pixel patches.
+- Higher contribution levels increase green coverage, contrast, and patch density.
+- Level `3` should feel as dense as the previous full-grass level.
+- Level `3` and level `4` should use the same deep full-grass color palette.
+- Level `4` should build on level `3` by adding one tiny pixel flower plus one smaller one-pixel flower accent that match the cute Minecraft-inspired mood without making the tile feel busy.
+- Levels `1`, `2`, and `3` should have visibly distinct grass coverage and contrast, with level `3` clearly darker and denser than level `2`.
+- Level `2` should be slightly darker than the light-grass feel while still staying clearly lighter than level `3`.
+- Do not use tall grass blades or separate isometric cube faces in the README graph; those details become visually noisy at 365-day scale.
+- Use simple SVG rectangles only for the field texture; no external images.
 
 The visual should stay restrained:
 
@@ -76,7 +83,9 @@ The visual should stay restrained:
 - No hidden dependency on custom fonts.
 - No text that becomes unreadable in README embeds.
 
-The first version should include a compact title such as `USERNAME's GitHub grass`, month labels, and a small legend from soil to full grass.
+The first version should include a compact title such as `USERNAME's GitHub grass`, month labels, and a small legend from dirt to flowered full grass.
+The title/header area should keep generous vertical breathing room so the title clearly separates from month labels and the first tile row.
+The month labels should sit closer to the first tile row than the title, so the labels feel attached to the graph rather than floating midway in the header.
 
 ## Contribution Level Mapping
 
